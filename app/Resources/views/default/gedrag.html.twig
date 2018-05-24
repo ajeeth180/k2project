@@ -13,8 +13,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('homepage') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('aanbod') }}">Trainingsaanbod</a>
@@ -22,8 +22,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('register') }}">Lid worden</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('gedrag') }}">Gedragsregels</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('gedrag') }}">Gedragsregels<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('contact') }}">Contact</a>
@@ -37,21 +37,10 @@
         </div>
     </nav>
 
-
-        <img src="https://www.modells.com/on/demandware.static/-/Sites-Modells-Library/default/dw70306f10/CategoryLanding/Fitness-and-Activities/Boxing%20&%20MMA/cat-landing-fitness-boxing-hero-012318.jpg" class="img-fluid" alt="Responsive image" style="width:100%;">
-        <div class="centered header-text">Wil je leren hoe je iemand moet uithalen?</div>
-         <a class="button" href="{{ path('register') }}">Schrijf je in</a>
-
 {% endblock %}
-
-
 
 {% block stylesheets %}
     <style>
-        html{
-            background-color: black;
-        }
-
         .front_title{
             color: red;
             text-align: center;
@@ -72,43 +61,5 @@
             width: 100%;
         }
 
-        .header-text
-        {
-            color:white;
-            font-size: 3.4375rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            text-shadow: 1px 1px #000;
-        }
-
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .button {
-            position: absolute;
-            top: 65%;
-            left: 29%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: #ff0000;
-            color: white;
-            font-size: 16px;
-            padding: 12px 24px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .button:hover {
-            background-color: darkred;
-            text-decoration: none;
-            color:white;
-        }
     </style>
 {% endblock %}
