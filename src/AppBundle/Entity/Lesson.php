@@ -28,10 +28,10 @@ class Lesson
     private $training;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Person", inversedBy="lessons")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="lessons")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $person;
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="Registration", mappedBy="registraion")
@@ -67,9 +67,9 @@ class Lesson
     /**
      * @var int
      *
-     * @ORM\Column(name="maxpersons", type="integer")
+     * @ORM\Column(name="maxusers", type="integer")
      */
-    private $maxpersons;
+    private $maxusers;
 
 
     /**
@@ -155,27 +155,27 @@ class Lesson
     }
 
     /**
-     * Set maxpersons
+     * Set maxusers
      *
-     * @param integer $maxpersons
+     * @param integer $maxusers
      *
      * @return Lesson
      */
-    public function setMaxpersons($maxpersons)
+    public function setMaxusers($maxusers)
     {
-        $this->maxpersons = $maxpersons;
+        $this->maxusers = $maxusers;
 
         return $this;
     }
 
     /**
-     * Get maxpersons
+     * Get maxusers
      *
      * @return int
      */
-    public function getMaxpersons()
+    public function getMaxusers()
     {
-        return $this->maxpersons;
+        return $this->maxusers;
     }
 }
 
