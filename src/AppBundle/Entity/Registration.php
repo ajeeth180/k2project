@@ -28,10 +28,10 @@ class Registration
     private $lesson;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Person", inversedBy="persons")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="users")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $persons;
+    private $users;
 
     /**
      * @var string

@@ -3,14 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Person
- *
- * @ORM\Table(name="person")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonRepository")
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class Person
+class User implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -22,7 +21,7 @@ class Person
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="user")
      */
     private $registrations;
 
@@ -33,16 +32,16 @@ class Person
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
      */
     private $lessons;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="loginname", type="string", length=255, unique=true)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
-    private $loginname;
+    private $username;
 
     /**
      * @var string
@@ -124,9 +123,9 @@ class Person
     /**
      * @var array
      *
-     * @ORM\Column(name="role", type="json_array")
+     * @ORM\Column(name="roles", type="json_array")
      */
-    private $role;
+    private $roles;
 
 
     /**
@@ -140,27 +139,27 @@ class Person
     }
 
     /**
-     * Set loginname
+     * Set username
      *
-     * @param string $loginname
+     * @param string $username
      *
-     * @return Person
+     * @return User
      */
-    public function setLoginname($loginname)
+    public function setUsername($username)
     {
-        $this->loginname = $loginname;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get loginname
+     * Get username
      *
      * @return string
      */
-    public function getLoginname()
+    public function getUsername()
     {
-        return $this->loginname;
+        return $this->username;
     }
 
     /**
@@ -168,7 +167,7 @@ class Person
      *
      * @param string $password
      *
-     * @return Person
+     * @return User
      */
     public function setPassword($password)
     {
@@ -192,7 +191,7 @@ class Person
      *
      * @param string $firstname
      *
-     * @return Person
+     * @return User
      */
     public function setFirstname($firstname)
     {
@@ -216,7 +215,7 @@ class Person
      *
      * @param string $preprovision
      *
-     * @return Person
+     * @return User
      */
     public function setPreprovision($preprovision)
     {
@@ -240,7 +239,7 @@ class Person
      *
      * @param string $lastname
      *
-     * @return Person
+     * @return User
      */
     public function setLastname($lastname)
     {
@@ -264,7 +263,7 @@ class Person
      *
      * @param \DateTime $dateofbirth
      *
-     * @return Person
+     * @return User
      */
     public function setDateofbirth($dateofbirth)
     {
@@ -288,7 +287,7 @@ class Person
      *
      * @param \DateTime $hiringdate
      *
-     * @return Person
+     * @return User
      */
     public function setHiringdate($hiringdate)
     {
@@ -312,7 +311,7 @@ class Person
      *
      * @param string $salary
      *
-     * @return Person
+     * @return User
      */
     public function setSalary($salary)
     {
@@ -336,7 +335,7 @@ class Person
      *
      * @param integer $socialsecnumber
      *
-     * @return Person
+     * @return User
      */
     public function setSocialsecnumber($socialsecnumber)
     {
@@ -360,7 +359,7 @@ class Person
      *
      * @param string $street
      *
-     * @return Person
+     * @return User
      */
     public function setStreet($street)
     {
@@ -384,7 +383,7 @@ class Person
      *
      * @param string $postalcode
      *
-     * @return Person
+     * @return User
      */
     public function setPostalcode($postalcode)
     {
@@ -408,7 +407,7 @@ class Person
      *
      * @param string $place
      *
-     * @return Person
+     * @return User
      */
     public function setPlace($place)
     {
@@ -428,27 +427,73 @@ class Person
     }
 
     /**
-     * Set role
+     * Set roles
      *
-     * @param array $role
+     * @param array $roles
      *
-     * @return Person
+     * @return User
      */
-    public function setRole($role)
+    public function setRoless($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get roles
      *
      * @return array
      */
-    public function getRole()
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
 

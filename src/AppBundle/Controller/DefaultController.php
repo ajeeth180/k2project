@@ -12,11 +12,25 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('default/index.html.twig', [
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if(isset($error))
+        {
+            $this->addFlash(
+                'error',
+                'Gegevens kloppen niet.'
+            );
+        }
+        return $this->render('default/index.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        ));
     }
 
     /**
@@ -53,27 +67,5 @@ class DefaultController extends Controller
     {
         return $this->render('default/contact.html.twig', [
         ]);
-    }
-
-    /**
-     * @Route("/login", name="login")
-     */
-    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
-    {
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        if(isset($error))
-        {
-            $this->addFlash(
-                'error',
-                'Gegevens kloppen niet.'
-            );
-        }
-        return $this->render('default/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
     }
 }

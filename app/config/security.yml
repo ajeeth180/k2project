@@ -2,15 +2,14 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        AppBundle\Entity\Person:
+        AppBundle\Entity\User:
             algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         our_db_provider:
             entity:
-                class: AppBundle:Person
-                property: loginname
+                class: AppBundle:User
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -23,12 +22,14 @@ security:
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+            pattern:    ^/
+            http_basic: ~
+            provider: our_db_provider
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             form_login:
-                login_path: login
-                check_path: login
+                login_path: homepage
+                check_path: homepage
                 csrf_token_generator: security.csrf.token_manager
                 success_handler: app.login_handler
 
