@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,16 +35,6 @@ class Lesson
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="registraion")
-     */
-    private $registrations;
-
-    public function __construct()
-    {
-        $this->registrations = new ArrayCollection();
-    }
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time", type="time")
@@ -70,6 +61,16 @@ class Lesson
      * @ORM\Column(name="maxusers", type="integer")
      */
     private $maxusers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="registraion")
+     */
+    private $registrations;
+
+    public function __construct()
+    {
+        $this->registrations = new ArrayCollection();
+    }
 
 
     /**

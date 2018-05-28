@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -19,22 +20,6 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="user")
-     */
-    private $registrations;
-
-    public function __construct()
-    {
-        $this->registrations = new ArrayCollection();
-        $this->lessons = new ArrayCollection();
-    }
-
-    /**
-     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
-     */
-    private $lessons;
 
     /**
      * @var string
@@ -126,6 +111,22 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="roles", type="json_array")
      */
     private $roles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
+     */
+    private $lessons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="user")
+     */
+    private $registrations;
+
+    public function __construct()
+    {
+        $this->registrations = new ArrayCollection();
+        $this->lessons = new ArrayCollection();
+    }
 
 
     /**

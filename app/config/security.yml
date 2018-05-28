@@ -10,6 +10,7 @@ security:
         our_db_provider:
             entity:
                 class: AppBundle:User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
