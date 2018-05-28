@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Training;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +39,10 @@ class DefaultController extends Controller
      */
     public function aanbodAction(Request $request)
     {
+        $aanbod = $this->getDoctrine()->getRepository(Training::class)->findAll();
+
         return $this->render('default/aanbod.html.twig', [
+            'aanbod' => $aanbod
         ]);
     }
 

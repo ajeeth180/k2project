@@ -36,6 +36,26 @@
             </form>
         </div>
     </nav>
+    <div id="test" class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Extra Cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for aanbod in aanbod %}
+        <tr>
+            <td>{{ aanbod.description }}</td>
+            <td>{{ aanbod.duration|date('H:i') }}</td>
+            <td>{{ aanbod.extracost }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
 
 {% endblock %}
 

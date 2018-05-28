@@ -1,0 +1,162 @@
+body{
+    background-color: black !important;
+}
+
+#test {
+    background: #fff;
+    height: 500px;
+    color: #000000;
+}
+
+.container-fluid{
+    background-color: white;
+    height: 106px !important;
+}
+
+.content{
+    background-color: black;
+}
+
+.p-container{
+    padding-top: 10px;
+    padding-bottom: 60px;
+}
+
+.front_title{
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+}
+
+.logo{
+    margin-top: 10px;
+}
+
+.container-fluid{
+    height:96px;
+}
+
+.navbar{
+    position: absolute;
+    width: 100%;
+}
+
+.header-text
+{
+    color:white;
+    font-size: 3.4375rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-shadow: 1px 1px #000;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button {
+    position: absolute;
+    top: 65%;
+    left: 29%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #ff0000;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: darkred;
+    text-decoration: none;
+    color:white;
+}
+
+.section-header {
+    margin-bottom: 0;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.container{
+    background-color: black;
+    color: white;
+}
+
+.section a{
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.section a:hover{
+    color: red;
+    text-decoration: none;
+}
+
+#footer{
+    margin-bottom: -150px;
+    clear: both;
+}
+
+.lookWrap{
+    position: relative;
+    background-color: black;
+    float: left;
+    width: 100%;
+}
+
+#look{
+    margin: auto;
+    width: 700px;
+}
+
+.section{
+    overflow: hidden;
+    float: left;
+    display: inline;
+    width: 160px;
+    margin: 0 15px 15px 0;
+    font: 10pt verdana;
+    line-height: 1.6em;
+}
+
+.section h3{
+    font-weight: normal;
+    font: 12pt Georgia;
+    text-transform: uppercase;
+    color: #f2f2f2;
+}
+
+.section a{
+    display: block;
+}
+
+.legality{
+    margin: auto;
+    width: 700px;
+    text-align: center;
+    clear: both;
+    font: 10pt verdana;
+    line-height: 2em;
+    padding: 40px 0 0 0;
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 650px) {
+
+}

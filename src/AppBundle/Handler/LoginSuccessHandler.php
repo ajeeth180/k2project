@@ -8,6 +8,7 @@
 
 namespace AppBundle\Handler;
 
+use http\Env\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,7 +37,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
      * @param Request           $request
      * @param TokenInterface    $token
      *
-     * @return Response never null
+     * @return Response
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
