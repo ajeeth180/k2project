@@ -36,8 +36,12 @@
             </form>
         </div>
     </nav>
+    <br>
+    <h1></h1>
+    <br>
+    <br>
     <div id="test" class="container">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-dark">
         <thead>
         <tr>
             <th>Description</th>
@@ -49,7 +53,11 @@
         {% for aanbod in aanbod %}
         <tr>
             <td>{{ aanbod.description }}</td>
-            <td>{{ aanbod.duration|date('H:i') }}</td>
+           {% if aanbod.duration|date('H:i') >= DateTime('01:00:00') %}
+                <td>{{ aanbod.duration|date('H') }} "uur"</td>
+           {% elseif aanbod.duration|date < 01:00:00 %}
+               <td>{{ aanbod.duration|date('i') }} "min"</td>
+           {% endif %}
             <td>{{ aanbod.extracost }}</td>
         </tr>
         {% endfor %}
