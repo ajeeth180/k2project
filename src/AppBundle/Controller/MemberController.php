@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Lesson;
+use AppBundle\Entity\Registration;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserWijzigType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -76,20 +78,17 @@ class MemberController extends Controller
         ]);
     }
 
-//    /**
-//     * @Route("/member/", name="userHomepage")
-//     */
-//    public function userHomeAction()
-//    {
-//        return $this->render('member/homepage.html.twig');
-//    }
-//
-//    /**
-//     * @Route("/member/", name="userHomepage")
-//     */
-//    public function userHomeAction()
-//    {
-//        return $this->render('member/homepage.html.twig');
-//    }
+    /**
+     * @Route("/member/aanbod", name="userAanbod")
+     */
+    public function userAanbodAction()
+    {
+        $lessons = $this->getDoctrine()->getRepository(Lesson::class)->findAll();
+        $registratons = $this->getDoctrine()->getRepository(Registration::class)->find();
+
+        return $this->render('member/userAanbod.html.twig', [
+            'lessons' => $lessons
+        ]);
+    }
 
 }

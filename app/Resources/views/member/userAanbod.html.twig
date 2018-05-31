@@ -1,5 +1,5 @@
 {% extends'member/base.html.twig' %}
-    {% block head %}
+{% block head %}
     <div class="container-fluid">
         <img src="{{ asset('img/logo.jpg') }}" class="float-left logo" style="height: 96px;" alt="Logo">
         <div class="container col-md-7 col-sm-9 frontpage_title" style="background-color: white;">
@@ -15,19 +15,36 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('userHomepage') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('userAanbod') }}">Trainingsaanbod</a>
-                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('userWijzig') }}">Wijzig Gegevens <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('userAanbod') }}">Trainingsaanbod<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('userWijzig') }}">Wijzig Gegevens</a>
                 </li>
             </ul>
         </div>
     </nav>
-    {% endblock %}
-    {% block content %}
-        <h3>Wijzig Gegevens</h3>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-    {% endblock %}
+{% endblock %}
+{% block content %}
+    <h3>Trainings Aanbod</h3>
+    <table class="table table-bordered table-dark">
+        <thead>
+        <tr>
+            <th>Tijd</th>
+            <th>Datum</th>
+            <th>Lokatie</th>
+            <th>Plek over</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lesson in lessons %}
+            <tr>
+                <td>{{ lesson.time|date('H:i') }}</td>
+                <td>{{ lesson.date|date('M-D H-i') }}</td>
+                <td>{{ lesson.location }}</td>
+                <td>{{ lesson.maxusers }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
