@@ -32,6 +32,9 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('preprovision')
             ->add('lastname')
-            ->add('dateofbirth', DateType::class);
+            ->add('dateofbirth', DateType::class, array(
+                'html5' => false,
+                'years' => range(1900, 2018)
+            ));
     }
 }
