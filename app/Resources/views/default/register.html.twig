@@ -41,10 +41,14 @@
     {%- endblock form_group_class %}
     {% block content %}
         <div class="container">
-        <h3>Registreren</h3>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Registreren</h3>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
     {% endblock %}
 

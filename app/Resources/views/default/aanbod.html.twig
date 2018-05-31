@@ -53,12 +53,8 @@
         {% for aanbod in aanbod %}
         <tr>
             <td>{{ aanbod.description }}</td>
-           {% if aanbod.duration|date('H:i') >= DateTime('01:00:00') %}
-                <td>{{ aanbod.duration|date('H') }} "uur"</td>
-           {% elseif aanbod.duration|date < 01:00:00 %}
-               <td>{{ aanbod.duration|date('i') }} "min"</td>
-           {% endif %}
-            <td>{{ aanbod.extracost }}</td>
+            <td>{{ aanbod.duration|date('i') }} min</td>
+            <td>€ {{ aanbod.extracost }}</td>
         </tr>
         {% endfor %}
         </tbody>
