@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 25 mei 2018 om 11:10
+-- Gegenereerd op: 31 mei 2018 om 09:49
 -- Serverversie: 10.1.32-MariaDB
 -- PHP-versie: 7.0.30
 
@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `lesson` (
   `id` int(11) NOT NULL,
+  `training_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `time` time NOT NULL,
   `date` date NOT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `maxusers` int(11) NOT NULL,
-  `training_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='person_id = instructor_id';
+  `maxusers` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -46,9 +46,9 @@ CREATE TABLE `lesson` (
 
 CREATE TABLE `registration` (
   `id` int(11) NOT NULL,
-  `payment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lesson_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `payment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -92,7 +92,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `preprovision`, `lastname`, `dateofbirth`, `hiringdate`, `salary`, `socialsecnumber`, `street`, `postalcode`, `place`, `roles`) VALUES
-(1, 'admin', '$2y$13$gGk9WUFgF.2YJRVNok0F.eneWDdJY1ZLGRTP.2IKRTvOrLCMhMxFG', 'admin', NULL, 'test', '2017-10-10', '2018-05-01', '150.00', 1, 'straat', '9999ZZ', 'den haag', '[\'ROLE_ADMIN\']');
+(1, 'admin', '$2y$13$BTn8NJHSD8.PbyllF.Z5/e03mIK6Pn0Jl6cwWF4xROyyiC93AjN4e', 'admin', NULL, 'admin', '2018-05-01', '2018-05-07', '2000.00', 2, 'straat 10', '1000LL', 'Den Haag', '[\"ROLE_ADMIN\"]'),
+(2, 'user', '$2y$12$WSnD7i1fcZJWSkA8d2DZduAPyYDesLlUyCOAvj.Z60odTfZ8B3UYm', 'user', NULL, 'user', '2018-05-01', '2018-05-06', NULL, NULL, NULL, NULL, NULL, '[\"ROLE_USER\"]');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -154,7 +155,7 @@ ALTER TABLE `training`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

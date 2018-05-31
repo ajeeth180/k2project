@@ -110,7 +110,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="roles", type="json_array")
      */
-    private $roles;
+    private $roles = array();
 
     /**
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
