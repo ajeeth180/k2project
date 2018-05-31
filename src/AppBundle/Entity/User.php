@@ -428,7 +428,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return array
+     * @return Role[] The user roles
      */
     public function getRoles()
     {
@@ -449,6 +449,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->roles,
             // see section on salt below
             // $this->salt,
         ));
@@ -461,6 +462,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->roles,
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, ['allowed_classes' => false]);

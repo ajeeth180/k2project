@@ -63,7 +63,7 @@ class Lesson
     private $maxusers;
 
     /**
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="registraion")
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="registration")
      */
     private $registrations;
 
