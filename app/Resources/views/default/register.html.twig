@@ -36,6 +36,14 @@
             </form>
         </div>
     </nav>
+    {% block content %}
+        <div class="container">
+        <h3>Registreren</h3>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+        </div>
+    {% endblock %}
 
 {% endblock %}
 

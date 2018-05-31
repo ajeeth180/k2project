@@ -8,8 +8,16 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class MemberController
+class MemberController extends Controller
 {
-
+    /**
+     * @Route("/user/", name="userHomepage")
+     */
+    public function userHomeAction()
+    {
+        return $this->render("member/homepage.html.twig");
+    }
 }

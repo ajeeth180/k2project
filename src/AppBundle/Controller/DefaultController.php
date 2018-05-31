@@ -3,10 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Training;
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends Controller
 {
@@ -49,9 +53,42 @@ class DefaultController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->add('save', SubmitType::class, array('label' => "Registreer"));
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $user->setRoles(["ROLE_USER"]);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                $user->getUsername() . " is geregistreerd"
+            );
+
+            return $this->redirectToRoute('homepage');
+        }
+        else
+        {
+            $this->addFlash(
+                'error',
+                $user->getUsername()." bestaat al!"
+            );
+            return $this->render('default/register.html.twig', [
+                'form'=>$form->createView()
+            ]);
+        }
         return $this->render('default/register.html.twig', [
+            'form'=>$form->createView()
         ]);
     }
 
