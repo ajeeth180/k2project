@@ -64,6 +64,7 @@ class Training
         return $this->id;
     }
 
+
     /**
      * Set description
      *
