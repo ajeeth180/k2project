@@ -3,8 +3,8 @@
 {% block body %}
     <div class="container-fluid">
         <img src="{{ asset('img/logo.jpg') }}" class="float-left logo" style="height: 96px;" alt="Logo">
-        <div class="container col-5 frontpage_title">
-            <h1 class="text-center front_title" >Training Centrum Den Haag</h1>
+        <div class="container col-md-7 col-sm-9 frontpage_title" style="background-color: white;">
+            <h1 class="text-center front_title" style="background-color: white;margin:0;">Training Centrum Den Haag</h1>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
@@ -40,26 +40,5 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <style>
-        .front_title{
-            color: red;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 90px;
-        }
 
-        .logo{
-            margin: 10px;
-        }
-
-        .container-fluid{
-            height:96px;
-        }
-
-        .navbar{
-            position: absolute;
-            width: 100%;
-        }
-
-    </style>
 {% endblock %}
