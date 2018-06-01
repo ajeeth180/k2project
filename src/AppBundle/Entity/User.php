@@ -115,7 +115,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
      */
-    private $ressons;
+    private $lessons;
 
     /**
      * @ORM\OneToMany(targetEntity="Registration", mappedBy="user")
@@ -459,21 +459,6 @@ class User implements UserInterface, \Serializable
     public function getRegistrations()
     {
         return $this->registrations;
-    }
-
-    public function addRegistration(Registration $r)
-    {
-        if ($this->registrations->contains($r)) {
-            return;
-        }
-        $this->registrations->add($r);
-    }
-    public function removeRegistration(Registration $r)
-    {
-        if (!$this->registrations->contains($r)) {
-            return;
-        }
-        $this->registrations->removeElement($r);
     }
 
     public function serialize()

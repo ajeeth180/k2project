@@ -85,12 +85,12 @@ class MemberController extends Controller
     {
         $u = $this->get('security.token_storage')->getToken()->getUser();
         $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
-        $userlessons = $this->getDoctrine()->getRepository(Registration::class)->findBy(['user' => $user]);
+        $registrations = $this->getDoctrine()->getRepository(Registration::class)->findBy(['user' => $user]);
         $lessons = $this->getDoctrine()->getRepository(Lesson::class)->findAll();
 
         return $this->render('member/userAanbod.html.twig', [
             'lessons' => $lessons,
-            'userlessons' => $userlessons
+            'registrations' => $registrations
         ]);
     }
 
@@ -119,9 +119,6 @@ class MemberController extends Controller
                     $registration->setUser($user);
                     $registration->setLesson($lesson);
                     $em->persist($registration);
-
-                    $user->addRegistration($registration);
-                    $em->persist($user);
                     $em->flush();
                 }
                 else
@@ -145,7 +142,7 @@ class MemberController extends Controller
     }
 
     /**
-     * @Route("/member/aanbod/{id}/", name="userUitschrijfen")
+     * @Route("/member/uitschrijf/{id}/", name="userUitschrijfen")
      */
     public function userUitschrijfenaction($id)
     {
@@ -153,8 +150,10 @@ class MemberController extends Controller
             $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
             $em = $this->getDoctrine()->getManager();
             $lesson = $this->getDoctrine()->getRepository(Lesson::class)->find($id);
-            $user->removeLesson($lesson);
-            $em->persist($user);
+            $registration = $this->getDoctrine()->getRepository(Registration::class)->findOneBy(['user' => $user, 'lesson' => $lesson]);
+            $em->remove($registration);
+            $this->addFlash('error', 'dit ');
+
             $em->flush();
 
             return $this->redirectToRoute('userAanbod');

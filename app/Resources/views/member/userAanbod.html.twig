@@ -70,13 +70,13 @@
             </tr>
             </thead>
             <tbody>
-            {% for userlesson in userlessons %}
+            {% for registration in registrations %}
                 <tr>
-                    <td>{{ userlesson.time|date('H:i') }}</td>
-                    <td>{{ userlesson.date|date('d-m') }}</td>
-                    <td>{{ userlesson.location }}</td>
-                    <td>{{ userlesson.registrations|length }}</td>
-                    <td><a href="{{ path('userUitschrijfen', {'id': userlesson.id}) }}"><button></button></a></td>
+                    <td>{{ registration.lesson.time|date('H:i') }}</td>
+                    <td>{{ registration.lesson.date|date('d-m') }}</td>
+                    <td>{{ registration.lesson.location }}</td>
+                    <td>{{ registration.lesson.registrations|length }}</td>
+                    <td>Schrijf uit<a href="{{ path('userUitschrijfen', {'id': registration.lesson.id}) }}"><button></button></a></td>
                 </tr>
             {% endfor %}
             </tbody>
