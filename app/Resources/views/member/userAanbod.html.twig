@@ -26,25 +26,60 @@
     </nav>
 {% endblock %}
 {% block content %}
-    <h3>Trainings Aanbod</h3>
-    <table class="table table-bordered table-dark">
-        <thead>
-        <tr>
-            <th>Tijd</th>
-            <th>Datum</th>
-            <th>Lokatie</th>
-            <th>Plek over</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for lesson in lessons %}
+    <div class="useraanbod">
+        <h3>Trainings Aanbod</h3>
+        <table class="table table-bordered table-dark">
+            <thead>
             <tr>
-                <td>{{ lesson.time|date('H:i') }}</td>
-                <td>{{ lesson.date|date('M-D H-i') }}</td>
-                <td>{{ lesson.location }}</td>
-                <td>{{ lesson.maxusers }}</td>
+                <th>Tijd</th>
+                <th>Datum</th>
+                <th>Lokatie</th>
+                <th>Plek over</th>
+                <th>Schrijf in</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td>{{ lesson.time|date('H:i') }}</td>
+                    <td>{{ lesson.date|date('d-m') }}</td>
+                    <td>{{ lesson.location }}</td>
+                    <td>{{ lesson.maxusers - lesson.registrations|length }}</td>
+                    {% if lesson.date|date('Y-d-m') < "now"|date('d-m') %}
+                        <td>Les is verlopen</td>
+                    {% elseif lesson.registrations|length == lesson.maxusers %}
+                        <td>Les is vol</td>
+                    {% else %}
+                        <td><a href="{{ path('userInschrijfen', { 'id': lesson.id }) }}"><button></button></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="ingeschreven">
+        <h3>Trainings Aanbod</h3>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th>Tijd</th>
+                <th>Datum</th>
+                <th>Lokatie</th>
+                <th>Ingeschreven personen</th>
+                <th>Schrijf Uit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for userlesson in userlessons %}
+                <tr>
+                    <td>{{ userlesson.time|date('H:i') }}</td>
+                    <td>{{ userlesson.date|date('d-m') }}</td>
+                    <td>{{ userlesson.location }}</td>
+                    <td>{{ userlesson.registrations|length }}</td>
+                    <td><a href="{{ path('userUitschrijfen', {'id': userlesson.id}) }}"><button></button></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

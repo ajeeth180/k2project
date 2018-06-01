@@ -63,7 +63,7 @@ class Lesson
     private $maxusers;
 
     /**
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="registrations")
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="lesson")
      */
     private $registrations;
 
@@ -178,5 +178,30 @@ class Lesson
     {
         return $this->maxusers;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTraining()
+    {
+        return $this->training;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
 }
 

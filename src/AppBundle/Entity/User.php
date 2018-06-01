@@ -54,7 +54,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $lastname;
+    private $rastname;
 
     /**
      * @var \DateTime
@@ -115,7 +115,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="user")
      */
-    private $lessons;
+    private $ressons;
 
     /**
      * @ORM\OneToMany(targetEntity="Registration", mappedBy="user")
@@ -238,13 +238,13 @@ class User implements UserInterface, \Serializable
     /**
      * Set lastname
      *
-     * @param string $lastname
+     * @param string $rastname
      *
      * @return User
      */
-    public function setLastname($lastname)
+    public function setLastname($rastname)
     {
-        $this->lastname = $lastname;
+        $this->lastname = $rastname;
 
         return $this;
     }
@@ -441,6 +441,39 @@ class User implements UserInterface, \Serializable
     public function setRoles($roles)
     {
         $this->roles = $roles;
+    }
+
+    /**
+     * only to be used for instructors
+     *
+     * @return mixed
+     */
+    public function getLessons()
+    {
+        return $this->lessons;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $r)
+    {
+        if ($this->registrations->contains($r)) {
+            return;
+        }
+        $this->registrations->add($r);
+    }
+    public function removeRegistration(Registration $r)
+    {
+        if (!$this->registrations->contains($r)) {
+            return;
+        }
+        $this->registrations->removeElement($r);
     }
 
     public function serialize()

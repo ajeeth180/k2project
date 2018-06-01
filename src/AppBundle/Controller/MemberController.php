@@ -79,16 +79,82 @@ class MemberController extends Controller
     }
 
     /**
-     * @Route("/member/aanbod", name="userAanbod")
+     * @Route("/member/aanbod/", name="userAanbod")
      */
     public function userAanbodAction()
     {
+        $u = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
+        $userlessons = $user->getRegistrations()->getLesson();
         $lessons = $this->getDoctrine()->getRepository(Lesson::class)->findAll();
-        $registratons = $this->getDoctrine()->getRepository(Registration::class)->find();
 
         return $this->render('member/userAanbod.html.twig', [
-            'lessons' => $lessons
+            'lessons' => $lessons,
+            'userlessons' => $userlessons
         ]);
+    }
+
+    /**
+     * @Route("/member/aanbod/{id}/", name="userInschrijfen")
+     */
+    public function userInschrijvenAction($id)
+    {
+        $u = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
+
+        if($id && count($lesson = $this->getDoctrine()->getRepository(Lesson::class)->find($id)) > 0)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $lesson = $this->getDoctrine()->getRepository(Lesson::class)->find($id);
+            if($lesson->getDate() > date('Y-m-d'))
+            {
+                if($lesson->getMaxusers() > count($lesson->getRegistrations()))
+                {
+                    $this->addFlash(
+                        'notice',
+                        'succesvol ingeschreven!' . $this->getDoctrine()->getRepository(Lesson::class)->find($id)->getUser()->getUsername()
+                    );
+                    $registration = new Registration();
+                    $registration->setPayment("false");
+                    $em->persist($registration);
+                    $user->addRegistration($registration);
+                    $em->persist($user);
+                    $em->flush();
+                }
+                else
+                {
+                    $this->addFlash(
+                        'error',
+                        'Deze les is vol.'
+                    );
+                }
+            }
+            else
+            {
+                $this->addFlash(
+                    'error',
+                    'Deze les is al verlopen.'
+                );
+            }
+        }
+
+        return $this->redirectToRoute('userAanbod');
+    }
+
+    /**
+     * @Route("/member/aanbod/{id}/", name="userUitschrijfen")
+     */
+    public function userUitschrijfenaction($id)
+    {
+            $u = $this->get('security.token_storage')->getToken()->getUser();
+            $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
+            $em = $this->getDoctrine()->getManager();
+            $lesson = $this->getDoctrine()->getRepository(Lesson::class)->find($id);
+            $user->removeLesson($lesson);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('userAanbod');
     }
 
 }
