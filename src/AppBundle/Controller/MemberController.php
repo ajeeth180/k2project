@@ -85,7 +85,7 @@ class MemberController extends Controller
     {
         $u = $this->get('security.token_storage')->getToken()->getUser();
         $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
-        $userlessons = $user->getRegistrations()->getLesson();
+        $userlessons = $this->getDoctrine()->getRepository(Registration::class)->findBy(['user' => $user]);
         $lessons = $this->getDoctrine()->getRepository(Lesson::class)->findAll();
 
         return $this->render('member/userAanbod.html.twig', [
@@ -112,11 +112,14 @@ class MemberController extends Controller
                 {
                     $this->addFlash(
                         'notice',
-                        'succesvol ingeschreven!' . $this->getDoctrine()->getRepository(Lesson::class)->find($id)->getUser()->getUsername()
+                        'succesvol ingeschreven!'
                     );
                     $registration = new Registration();
                     $registration->setPayment("false");
+                    $registration->setUser($user);
+                    $registration->setLesson($lesson);
                     $em->persist($registration);
+
                     $user->addRegistration($registration);
                     $em->persist($user);
                     $em->flush();
