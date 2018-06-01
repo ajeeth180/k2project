@@ -39,9 +39,10 @@
                     <a class="nav-link" href="{{ path('contact') }}">Contact</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2"  placeholder="Username" aria-label="Username">
-                <input class="form-control mr-sm-2"  placeholder="Password" aria-label="Password">
+            <form class="form-inline my-2 my-lg-0" action="{{ path('homepage') }}" method="post">
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control mr-sm-2"  placeholder="Username" aria-label="Username">
+                <input type="password" id="password" name="_password" required="required" class="form-control mr-sm-2"  placeholder="Password" aria-label="Password">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <button class="btn my-2 my-sm-0" type="submit">Login</button>
             </form>
         </div>
@@ -55,6 +56,40 @@
             {{ form_start(form) }}
             {{ form_widget(form) }}
             {{ form_end(form) }}
+        </div>
+
+        <div id="footer">
+            <div class="lookWrap">
+                <div id="look">
+                    <div class="section">
+                        <h3>Support</h3>
+                        <a href="#">FAQs</a>
+                        <a href="#">Neem contact op</a>
+                        <a href="#">Privacybeleid</a>
+                    </div>
+                    <div class="section">
+                        <h3>Media</h3>
+                        <a href="#">Reviews</a>
+                        <a href="#">Sponsor</a>
+                    </div>
+                    <div class="section">
+                        <h3>Volg ons</h3>
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Pinterest</a>
+                        <a href="#">Sponsor</a>
+                    </div>
+                    <div class="section">
+                        <h3>Over ons</h3>
+                        <a href="#">Ons bedrijf</a>
+                        <a href="#">Verklaring</a>
+                        <a href="#">Het Team</a>
+                    </div>
+                </div>
+            </div>
+            <div class="legality">
+                © Copyright 2018 k2strijders
+            </div>
         </div>
     {% endblock %}
 

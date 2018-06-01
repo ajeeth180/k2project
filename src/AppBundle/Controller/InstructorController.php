@@ -8,8 +8,16 @@
 
 namespace AppBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class InstructorController
+class InstructorController extends Controller
 {
-
+    /**
+     * @Route("/instructor/", name="instructorHomepage")
+     */
+    public function instructorHomeAction()
+    {
+        return $this->render('instructor/homepage.html.twig');
+    }
 }

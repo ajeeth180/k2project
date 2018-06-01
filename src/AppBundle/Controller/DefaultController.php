@@ -41,11 +41,24 @@ class DefaultController extends Controller
     /**
      * @Route("/aanbod", name="aanbod")
      */
-    public function aanbodAction(Request $request)
+    public function aanbodAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
         $aanbod = $this->getDoctrine()->getRepository(Training::class)->findAll();
 
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if(isset($error))
+        {
+            $this->addFlash(
+                'error',
+                'Gegevens kloppen niet.'
+            );
+        }
         return $this->render('default/aanbod.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
             'aanbod' => $aanbod
         ]);
     }
@@ -53,7 +66,7 @@ class DefaultController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, AuthenticationUtils $authenticationUtils)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -66,6 +79,9 @@ class DefaultController extends Controller
                 'error',
                 $user->getUsername()." bestaat al!"
             );
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
 
             return $this->redirectToRoute('homepage');
         }
@@ -92,11 +108,10 @@ class DefaultController extends Controller
                 'error',
                 $user->getUsername()." bestaat al!"
             );
-            return $this->render('default/register.html.twig', [
-                'form'=>$form->createView()
-            ]);
         }
         return $this->render('default/register.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
             'form'=>$form->createView()
         ]);
     }
@@ -104,18 +119,44 @@ class DefaultController extends Controller
     /**
      * @Route("/gedrag", name="gedrag")
      */
-    public function gedragAction(Request $request)
+    public function gedragAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if(isset($error))
+        {
+            $this->addFlash(
+                'error',
+                'Gegevens kloppen niet.'
+            );
+        }
         return $this->render('default/gedrag.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error
         ]);
     }
 
     /**
      * @Route("/contact", name="contact")
      */
-    public function contractAction(Request $request)
+    public function contractAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if(isset($error))
+        {
+            $this->addFlash(
+                'error',
+                'Gegevens kloppen niet.'
+            );
+        }
         return $this->render('default/contact.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error
         ]);
     }
 }
