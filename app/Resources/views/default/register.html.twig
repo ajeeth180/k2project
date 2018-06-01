@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_label_class -%}
+    col-sm-4
+{%- endblock form_label_class %}
+
+{% block form_group_class -%}
+    col-sm-8
+{%- endblock form_group_class %}
+
 {% block body %}
     <div class="container-fluid">
         <img src="{{ asset('img/logo.jpg') }}" class="float-left logo" style="height: 96px;" alt="Logo">
@@ -36,24 +46,22 @@
             </form>
         </div>
     </nav>
-    {% block form_group_class -%}
-        col-sm-6
-    {%- endblock form_group_class %}
     {% block content %}
+        <br>
+        <br>
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>Registreren</h3>
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    {{ form_end(form) }}
-                </div>
-            </div>
+            <h3>Registreren</h3>
+            <br>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
         </div>
     {% endblock %}
 
 {% endblock %}
 
 {% block stylesheets %}
+
+
 
 {% endblock %}
