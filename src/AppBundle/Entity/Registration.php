@@ -74,5 +74,39 @@ class Registration
     {
         return $this->payment;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLesson()
+    {
+        return $this->lesson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $lesson
+     */
+    public function setLesson($lesson)
+    {
+        $this->lesson = $lesson;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 }
 

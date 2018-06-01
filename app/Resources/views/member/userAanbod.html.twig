@@ -1,0 +1,85 @@
+{% extends'member/base.html.twig' %}
+{% block head %}
+    <div class="container-fluid">
+        <img src="{{ asset('img/logo.jpg') }}" class="float-left logo" style="height: 96px;" alt="Logo">
+        <div class="container col-md-7 col-sm-9 frontpage_title" style="background-color: white;">
+            <h1 class="text-center front_title" style="background-color: white;margin:0;">Training Centrum Den Haag</h1>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('userHomepage') }}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('userAanbod') }}">Trainingsaanbod<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('userWijzig') }}">Wijzig Gegevens</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="useraanbod">
+        <h3>Trainings Aanbod</h3>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th>Tijd</th>
+                <th>Datum</th>
+                <th>Lokatie</th>
+                <th>Plek over</th>
+                <th>Schrijf in</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td>{{ lesson.time|date('H:i') }}</td>
+                    <td>{{ lesson.date|date('d-m') }}</td>
+                    <td>{{ lesson.location }}</td>
+                    <td>{{ lesson.maxusers - lesson.registrations|length }}</td>
+                    {% if lesson.date|date('Y-d-m') < "now"|date('d-m') %}
+                        <td>Les is verlopen</td>
+                    {% elseif lesson.registrations|length == lesson.maxusers %}
+                        <td>Les is vol</td>
+                    {% else %}
+                        <td><a href="{{ path('userInschrijfen', { 'id': lesson.id }) }}"><button></button></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="ingeschreven">
+        <h3>Trainings Aanbod</h3>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th>Tijd</th>
+                <th>Datum</th>
+                <th>Lokatie</th>
+                <th>Ingeschreven personen</th>
+                <th>Schrijf Uit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for registration in registrations %}
+                <tr>
+                    <td>{{ registration.lesson.time|date('H:i') }}</td>
+                    <td>{{ registration.lesson.date|date('d-m') }}</td>
+                    <td>{{ registration.lesson.location }}</td>
+                    <td>{{ registration.lesson.registrations|length }}</td>
+                    <td>Schrijf uit<a href="{{ path('userUitschrijfen', {'id': registration.lesson.id}) }}"><button></button></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
