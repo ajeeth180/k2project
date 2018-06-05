@@ -1,4 +1,4 @@
-{% include'base.html.twig' %}
+{% extends 'instructor/base.html.twig' %}
 {% block head %}
     <div class="container-fluid">
         <img src="{{ asset('img/logo.jpg') }}" class="float-left logo" style="height: 96px;" alt="Logo">
@@ -15,17 +15,35 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('userHomepage') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
-                {#<li class="nav-item">#}
-                {#<a class="nav-link" href="{{ path('aanbod') }}">Trainingsaanbod</a>#}
-                {#</li>#}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('userWijzig') }}">Wijzig Gegevens</a>
-                </li>
             </ul>
-            <button class="btn my-2 my-sm-0" type="submit">Login</button>
+            <a href="{{ path('logout') }}"><button class="btn logout my-2 my-sm-0">Logout</button></a>
         </div>
     </nav>
 {% endblock %}
 {% block content %}
-    <h2>Member pagina</h2>
+    <h2>Instructor pagina</h2>
+    <br>
+    <table class="table table-bordered table-dark">
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Duration</th>
+        <th>Extra Cost</th>
+        <th>Wijzigen</th>
+        <th>Verwijderen</th>
+        <th><i class="fa fa-plus" aria-hidden="true" style="color:green;"></i></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for aanbod in aanbod %}
+        <tr>
+            <td>{{ aanbod.description }}</td>
+            <td>{{ aanbod.duration|date('i') }} min</td>
+            <td>€ {{ aanbod.extracost }}</td>
+            <td><i class="fa fa-pencil" aria-hidden="true" style="color:yellow;"></i></td>
+            <td><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

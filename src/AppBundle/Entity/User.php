@@ -54,7 +54,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $rastname;
+    private $lastname;
 
     /**
      * @var \DateTime
@@ -238,13 +238,13 @@ class User implements UserInterface, \Serializable
     /**
      * Set lastname
      *
-     * @param string $rastname
+     * @param string $lastname
      *
      * @return User
      */
-    public function setLastname($rastname)
+    public function setLastname($lastname)
     {
-        $this->lastname = $rastname;
+        $this->lastname = $lastname;
 
         return $this;
     }
