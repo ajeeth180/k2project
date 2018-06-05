@@ -13,38 +13,18 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('adminHomepage') }}">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('adminHomepage') }}">Home</a>
                 </li>
                 {#<li class="nav-item active">#}
-                    {#<a class="nav-link" href="{{ path('') }}"><span class="sr-only">(current)</span></a>#}
+                {#<a class="nav-link" href="{{ path('') }}"><span class="sr-only">(current)</span></a>#}
                 {#</li>#}
             </ul>
         </div>
     </nav>
 {% endblock %}
 {% block content %}
-<h2>Admin pagina</h2>
-    <table class="table table-bordered table-dark">
-        <thead>
-        <tr>
-            <th>Omschrijving</th>
-            <th>Tijd</th>
-            <th>Extra Kosten</th>
-            <th>Wijzig</th>
-            <th>Verwijder</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for training in trainingen %}
-            <tr>
-                <td>{{ training.description }}</td>
-                <td>{{ training.duration|date('H:i') }}</td>
-                <td>&euro;{{ training.extracost }}</td>
-                <td><a href="{{ path('weizigTraining', {'id':training.id}) }}"><i class="fa fa-pencil" aria-hidden="true" style="color:yellow;"></i></a></td>
-                <td><a href="{{ path('deleteTraining', {'id': training.id}) }}"><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a></td>
-            </tr>
-        {% endfor %}
-        <tr></tr>
-        </tbody>
-    </table>
+    <h2>Voeg Training Toe</h2>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}
