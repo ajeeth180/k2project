@@ -86,7 +86,18 @@ class MemberController extends Controller
         $u = $this->get('security.token_storage')->getToken()->getUser();
         $user = $this->getDoctrine()->getRepository(User::class)->find($u->getId());
         $registrations = $this->getDoctrine()->getRepository(Registration::class)->findBy(['user' => $user]);
-        $lessons = $this->getDoctrine()->getRepository(Lesson::class)->getBeschikbareLessen($user);
+        $lessons = $this->getDoctrine()->getRepository(Lesson::class)->findAll();
+//        $beschikbaar = [];
+//        for($i=0; $i<count($lessons); $i++)
+//        {
+//            for($j=0; $j<count($registrations); $j++)
+//            {
+//                if($lessons->id[$i] == $registrations->lesson[$j])
+//                {
+//                    array_push($beschikbaar, $lessons);
+//                }
+//            }
+//        }
 
         return $this->render('member/userAanbod.html.twig', [
             'lessons' => $lessons,

@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class RegistrationRepository extends \Doctrine\ORM\EntityRepository
 {
+//    public function getBeschikbareLessen($user)
+//    {
+//        $em=$this->getEntityManager();
+//        $query=$em->createQuery('SELECT l FROM AppBundle:Lesson l WHERE :r NOT MEMBER OF r.user where r.lesson');
+//
+//        $query->setParameter('user',$user);
+//
+//        return $query->getResult();
+//    }
 }
+
+//lesson where user not member of registration where
