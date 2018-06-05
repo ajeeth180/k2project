@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Training;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -19,6 +20,18 @@ class AdminController extends Controller
      */
     public function adminHomeAction()
     {
-        return $this->render('admin/homepage.html.twig');
+        $trainingen = $this->getDoctrine()->getRepository(Training::class)->findAll();
+
+        return $this->render('admin/homepage.html.twig', [
+            'trainingen' => $trainingen
+        ]);
+    }
+
+    /**
+     * @Route("/admin/trainingsoverzicht", name="trainingsoverzicht")
+     */
+    public function adminTrainingAction()
+    {
+
     }
 }
