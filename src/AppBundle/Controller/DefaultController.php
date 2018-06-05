@@ -72,19 +72,12 @@ class DefaultController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, array('label' => "Registreer"));
         $form->handleRequest($request);
-        $bestaande_user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('username' => $form->getData()->getUsername()));
-        if($bestaande_user)
-        {
-            $this->addFlash(
-                'error',
-                $user->getUsername()." bestaat al!"
-            );
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-            return $this->redirectToRoute('homepage');
-        }
+
         if($form->isSubmitted() && $form->isValid())
         {
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());

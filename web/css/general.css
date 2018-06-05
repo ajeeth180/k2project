@@ -9,6 +9,10 @@ body{
     text-align: center;
 }
 
+.logout{
+    background-color: #FF3333 !important;
+    color: antiquewhite;
+}
 
 .content{
     background-color: black;
