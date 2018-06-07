@@ -35,6 +35,30 @@ class Lesson
     private $user;
 
     /**
+     * @param mixed $training
+     */
+    public function setTraining($training)
+    {
+        $this->training = $training;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @param mixed $registrations
+     */
+    public function setRegistrations($registrations)
+    {
+        $this->registrations = $registrations;
+    }
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time", type="time")

@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('userHomepage') }}">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('instructorHomepage') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <a href="{{ path('logout') }}"><button class="btn logout my-2 my-sm-0">Logout</button></a>
@@ -31,9 +31,10 @@
         <th>Datum</th>
         <th>Location</th>
         <th>Maximaal aantal deelnemers</th>
+        <th>Details</th>
         <th>Wijzigen</th>
         <th>Verwijderen</th>
-        <th><i class="fa fa-plus" aria-hidden="true" style="color:green;"></i></th>
+        <th><a class="fa fa-plus" aria-hidden="true" href="{{ path('addLesson') }}" style="color:green;"></a></th>
     </tr>
     </thead>
     <tbody>
@@ -44,8 +45,9 @@
             <td>{{ lesson.date|date("d-m-Y") }}</td>
             <td>{{ lesson.location }}</td>
             <td>{{ lesson.maxusers }}</td>
-            <td><i class="fa fa-pencil" aria-hidden="true" style="color:yellow;"></i></td>
-            <td><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></td>
+            <td><a class="fa fa-info" aria-hidden="true" style="color:lightseagreen;"></a></td>
+            <td><a class="fa fa-pencil" aria-hidden="true" style="color:yellow;" href="{{ path('updateLesson', {'id':lesson.id}) }}"></a></td>
+            <td><a class="fa fa-trash" aria-hidden="true" style="color:red;" href="{{ path('deleteLesson', {'id':lesson.id}) }}"></a></td>
         </tr>
     {% endfor %}
     </tbody>

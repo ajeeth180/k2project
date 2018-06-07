@@ -21,33 +21,9 @@
     </nav>
 {% endblock %}
 {% block content %}
-    <h2>Instructor pagina</h2>
+    <h2>Lesson aanmaken</h2>
     <br>
-    <table class="table table-bordered table-dark">
-    <thead>
-    <tr>
-        <th>Training</th>
-        <th>Tijd</th>
-        <th>Datum</th>
-        <th>Location</th>
-        <th>Maximaal aantal deelnemers</th>
-        <th>Wijzigen</th>
-        <th>Verwijderen</th>
-        <th><i class="fa fa-plus" aria-hidden="true" style="color:green;"></i></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for lesson in lesson %}
-        <tr>
-            <td>{{ lesson.training.description }}</td>
-            <td>{{ lesson.time|date("H:i") }}</td>
-            <td>{{ lesson.date|date("d-m-Y") }}</td>
-            <td>{{ lesson.location }}</td>
-            <td>{{ lesson.maxusers }}</td>
-            <td><i class="fa fa-pencil" aria-hidden="true" style="color:yellow;"></i></td>
-            <td><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}
